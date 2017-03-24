@@ -33,9 +33,9 @@ Books.save({
 * [Collection](#store)
   * [Collection.create(:object [,...])](#store-store)
   * [Collection.save(:object [,...])](#store-store)
-  * [Collection.find(:id)](#store-find-id)
+  * [Collection.get(:id)](#store-find-id)
+  * [Collection.get()](#store-find-all)
   * [Collection.find(:query)](#store-find-query)
-  * [Collection.find()](#store-find-all)
   * [Collection.remove(:item [,...])](#store-remove-item)
   * [Collection.removeAll()](#store-remove-all)
 

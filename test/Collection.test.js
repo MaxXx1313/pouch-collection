@@ -69,7 +69,7 @@ describe('Collection', function(){
   });
 
 
-  describe('find', function(){
+  describe('get', function(){
 
     //
     it('single argument', function(){
@@ -81,7 +81,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.find('1');
+          return collection.get('1');
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0]]);
         });
@@ -97,7 +97,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.find(['1', '3']);
+          return collection.get(['1', '3']);
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0], data[2]]);
         });
@@ -113,7 +113,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.find();
+          return collection.get();
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0], data[1]]);
         });
