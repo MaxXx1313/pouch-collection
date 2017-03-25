@@ -49,12 +49,12 @@ describe('Collection', function(){
   /**
    *
    */
-  describe('create', function(){
+  describe('save', function(){
 
     /**
      *
      */
-    it('simple', function(){
+    it('single doc', function(){
       var book = {title:'Me'};
       return collection.save(book)
         .then(doc=>{
@@ -84,6 +84,22 @@ describe('Collection', function(){
           return collection.get('1');
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0]]);
+        });
+    });
+
+    //
+    it('single non-existed', function(){
+      let data = [
+        {_id:'book!1', type:'book', val:1},
+        {_id:'book!2', type:'book', val:2},
+        {_id:'book!3', type:'book', val:3},
+      ];
+
+      return PouchMock.load(db, data)
+        .then(()=>{
+          return collection.get('4');
+        }).then(docs=>{
+          pouchAssertDocs(docs, []);
         });
     });
 
@@ -119,6 +135,33 @@ describe('Collection', function(){
         });
     });
 
+  });
+
+
+  describe('update', function(){
+    //
+    it('single doc', function(){
+      let data = [
+        {_id:'book!1', type:'book', val:1},
+        {_id:'book!2', type:'book', val:2},
+        {_id:'book!3', type:'book', val:3},
+      ];
+
+      return PouchMock.load(db, data)
+        .then(()=>{
+          return collection.update('1', function(doc){
+            doc.val = 11;
+            doc._id = 'book!12'; // it shouldn't affect
+            doc._rev = 'asdasd'; // it shouldn't affect
+            return doc;
+          });
+        }).then(doc=>{
+          assert.equal(doc._id, 'book!1');
+          assert.ok(doc._rev);
+          assert.equal(doc.type, 'book');
+          assert.equal(doc.val, 11);
+        });
+    });
   });
 
 
