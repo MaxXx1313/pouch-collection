@@ -65,6 +65,28 @@ describe('Collection', function(){
         })
     });
 
+    /**
+     *
+     */
+    it('existed doc', function(){
+      let data = [
+        {_id:'book!1', type:'book', val:1},
+        {_id:'book!2', type:'book', val:2},
+        {_id:'book!3', type:'book', val:3},
+      ];
+      var book = {_id:1, title:'Me'};
+
+      return PouchMock.load(db, data)
+        .then(()=>collection.save(book))
+        .then(doc=>{
+          assert.equal(doc._id, 'book!1');
+          assert.ok(doc._rev);
+          assert.equal(doc.type, 'book');
+          assert.equal(doc.title, book.title);
+          assert.ok(!doc.val);
+        })
+    });
+
 
   });
 
@@ -153,6 +175,7 @@ describe('Collection', function(){
             doc.val = 11;
             doc._id = 'book!12'; // it shouldn't affect
             doc._rev = 'asdasd'; // it shouldn't affect
+            doc.type = 'asdasd'; // it shouldn't affect
             return doc;
           });
         }).then(doc=>{
@@ -162,6 +185,32 @@ describe('Collection', function(){
           assert.equal(doc.val, 11);
         });
     });
+
+    //
+    it('non-existed doc', function(){
+      let data = [
+        {_id:'book!1', type:'book', val:1},
+        {_id:'book!2', type:'book', val:2},
+        {_id:'book!3', type:'book', val:3},
+      ];
+
+      return PouchMock.load(db, data)
+        .then(()=>{
+          return collection.update(4, function(doc){
+            doc.val = 14;
+            doc._id = 'book!12'; // it shouldn't affect
+            doc._rev = 'asdasd'; // it shouldn't affect
+            doc.type = 'asdasd'; // it shouldn't affect
+            return doc;
+          });
+        }).then(doc=>{
+          assert.equal(doc._id, 'book!4');
+          assert.ok(doc._rev);
+          assert.equal(doc.type, 'book');
+          assert.equal(doc.val, 14);
+        });
+    });
+
   });
 
 
