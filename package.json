@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Store.PouchDb is a simple interface wrapper plugin around [PouchDB](http://pouchdb.com/api.html) offline first database.",
   "main": "lib/pouch-collection.js",
-  "files": ["lib/*"],
+  "files": [
+    "lib/*"
+  ],
   "directories": {
     "test": "test"
   },
@@ -14,6 +16,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "pouchdb": "^6.1.2"
+    "pouchdb-memory": "^6.0.0"
   }
 }

@@ -1,10 +1,14 @@
+/* jshint esversion: 6 */
 
 const assert = require('assert');
-const PouchDB = require('pouchdb');
+const PouchMock = require('./PouchMock.js');
+
+// const PouchDB = require('pouchdb');
+const PouchDB = require('./PouchMock.js').PouchDB;
+
 const PouchCollection = require('../lib/pouch-collection.js');
 PouchDB.plugin(PouchCollection);
 
-const PouchMock = require('./PouchMock.js');
 
 
 // * [Collection](#store)
@@ -62,7 +66,7 @@ describe('Collection', function(){
           assert.ok(doc._rev);
           assert.equal(doc.type, 'book');
           assert.equal(doc.title, book.title);
-        })
+        });
     });
 
     /**
@@ -84,7 +88,7 @@ describe('Collection', function(){
           assert.equal(doc.type, 'book');
           assert.equal(doc.title, book.title);
           assert.ok(!doc.val);
-        })
+        });
     });
 
 

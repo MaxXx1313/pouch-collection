@@ -1,7 +1,8 @@
 "use strict";
 /* jshint esversion: 6 */
 
-const PouchDB = require('pouchdb');
+const PouchDB = require('pouchdb-memory');
+// const PouchDB = require('pouchdb');
 
 let index = parseInt(Date.now());
 
@@ -12,7 +13,9 @@ module.exports = {
     create:createMock,
     createMock:createMock,
     load:load,
-    dump:dump
+    dump:dump,
+
+    PouchDB:PouchDB
     // delete:deleteMock
 
     // TODO: delete mock db on exit. in-memory db will cover this issue
