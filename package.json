@@ -1,7 +1,7 @@
 {
   "name": "pouch-collections",
   "version": "1.0.0",
-  "description": "Store.PouchDb is a simple interface wrapper plugin around [PouchDB](http://pouchdb.com/api.html) offline first database.",
+  "description": "Collection.PouchDb is a simple interface wrapper plugin around [PouchDB](http://pouchdb.com/api.html) offline first database.",
   "main": "lib/pouch-collection.js",
   "files": [
     "lib/*"
