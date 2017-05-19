@@ -1,5 +1,5 @@
 
-![Build Status](https://travis-ci.org/MaxXx1313/pouch-collection.svg?branch=master)
+[![Build Status](https://travis-ci.org/MaxXx1313/pouch-collection.svg?branch=master)](https://travis-ci.org/MaxXx1313/pouch-collection)
 
 
 Collection.PouchDb is a simple interface wrapper plugin around [PouchDB](http://pouchdb.com/api.html) offline first database.
