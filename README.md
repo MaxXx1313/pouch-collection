@@ -30,14 +30,14 @@ Books.save({
 
 # API
 
-* [Collection](#store)
-  * [Collection.create(:object [,...])](#store-store)
+* [Collection](#collection)
   * [Collection.save(:object [,...])](#store-store)
   * [Collection.get(:id)](#store-find-id)
   * [Collection.get()](#store-find-all)
   * [Collection.find(:query)](#store-find-query)
   * [Collection.remove(:item [,...])](#store-remove-item)
   * [Collection.removeAll()](#store-remove-all)
+  * [Collection.create(:object [,...])](#collection)
 
 ## TODO
 
@@ -53,7 +53,7 @@ Books.save({
   * [listener.cancel()](#listener-cancel)
 
 
-# Store<a name="store"></a>
+# Collection<a name="store"></a>
 
 ## Store.store(:item [,...])<a name="store-store"></a>
 

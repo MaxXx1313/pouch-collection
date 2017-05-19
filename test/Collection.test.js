@@ -24,7 +24,7 @@ PouchDB.plugin(PouchCollection);
  */
 describe('Collection', function(){
 
-  let collection = null;
+  let bookCollection = null;
   let db = null;
 
   //
@@ -33,7 +33,7 @@ describe('Collection', function(){
       return PouchMock.create()
         .then(_db=>{
           db = _db;
-          collection = db.collection('book');
+          bookCollection = db.collection('book');
       });
 
   });
@@ -45,9 +45,9 @@ describe('Collection', function(){
    *
    */
   it('id', function(){
-      assert.equal( collection.id('book!123'), 'book!123');
-      assert.equal( collection.id('123'), 'book!123');
-      assert.ok( collection.id().startsWith('book!') );
+      assert.equal( bookCollection.id('book!123'), 'book!123');
+      assert.equal( bookCollection.id('123'), 'book!123');
+      assert.ok( bookCollection.id().startsWith('book!') );
   });
 
   /**
@@ -60,7 +60,7 @@ describe('Collection', function(){
      */
     it('single doc', function(){
       var book = {title:'Me'};
-      return collection.save(book)
+      return bookCollection.save(book)
         .then(doc=>{
           assert.ok(doc._id);
           assert.ok(doc._rev);
@@ -81,7 +81,7 @@ describe('Collection', function(){
       var book = {_id:1, title:'Me'};
 
       return PouchMock.load(db, data)
-        .then(()=>collection.save(book))
+        .then(()=>bookCollection.save(book))
         .then(doc=>{
           assert.equal(doc._id, 'book!1');
           assert.ok(doc._rev);
@@ -107,7 +107,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.get('1');
+          return bookCollection.get('1');
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0]]);
         });
@@ -123,7 +123,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.get('4');
+          return bookCollection.get('4');
         }).then(docs=>{
           pouchAssertDocs(docs, []);
         });
@@ -139,7 +139,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.get(['1', '3']);
+          return bookCollection.get(['1', '3']);
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0], data[2]]);
         });
@@ -155,7 +155,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.get();
+          return bookCollection.get();
         }).then(docs=>{
           pouchAssertDocs(docs, [data[0], data[1]]);
         });
@@ -175,7 +175,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.update('1', function(doc){
+          return bookCollection.update('1', function(doc){
             doc.val = 11;
             doc._id = 'book!12'; // it shouldn't affect
             doc._rev = 'asdasd'; // it shouldn't affect
@@ -200,7 +200,7 @@ describe('Collection', function(){
 
       return PouchMock.load(db, data)
         .then(()=>{
-          return collection.update(4, function(doc){
+          return bookCollection.update(4, function(doc){
             doc.val = 14;
             doc._id = 'book!12'; // it shouldn't affect
             doc._rev = 'asdasd'; // it shouldn't affect
@@ -226,9 +226,10 @@ function pouchAssertDocs(actualDocs, expectedDocs){
   assert.equal(actualDocs.length, expectedDocs.length);
 
   for (var i = actualDocs.length - 1; i >= 0; i--) {
+    // has revision
     assert.ok(actualDocs[i]._rev);
     delete actualDocs[i]._rev;
-
+    // match rest data
     assert.deepEqual(actualDocs[i], expectedDocs[i]);
   }
 }
