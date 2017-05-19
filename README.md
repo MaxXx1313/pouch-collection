@@ -1,3 +1,7 @@
+
+![Build Status](https://travis-ci.org/MaxXx1313/pouch-collection.svg?branch=master)
+
+
 Collection.PouchDb is a simple interface wrapper plugin around [PouchDB](http://pouchdb.com/api.html) offline first database.
 
 Inspired by the [Dreamcode API](http://nobackend.org/dreamcode.html) project  this project aims to provide a simple interface to access often used request methods like `store` and `find`.
